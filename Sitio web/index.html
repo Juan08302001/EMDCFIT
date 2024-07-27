@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EMDC FIT ofrece una experiencia de entrenamiento excepcional con servicios personalizados para ayudarte a alcanzar tus objetivos de fitness.">
+    <meta name="keywords" content="fitness, entrenamiento, gimnasio, salud, nutrición">
+    <meta name="author" content="EMDC FIT">
+
+    <title>EMDC FIT</title>
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+        header {
+            background-color: #000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        nav {
+            background-color: #000;
+            padding: 10px 0;
+            font-size: 20px;
+            text-align: center;
+            overflow: hidden;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .container {
+            margin: 20px auto;
+            padding: 0 15px;
+            max-width: 1200px;
+        }
+        .section {
+            padding: 50px 20px;
+            background-color: #fff;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .section p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        .section img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .order{
+            color: black;
+        }
+        .carousel-item img {
+            width: 60%;
+            margin-left: 20%;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .carousel-item p {
+            color: #666;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        
+        .carousel-control-prev-icon::after,
+        .carousel-control-next-icon::after {
+            font-size: 70px;
+            color: #000; /* Cambia este color según tus necesidades */
+        }
+       
+        .carousel-control-prev {
+            left: 15%;
+            bottom:10%;
+        }
+        .carousel-control-next {
+            right: 15%;
+            bottom:10%;
+
+        }
+
+        .card {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.14);
+        }
+        .card-img-top {
+            object-fit: cover;
+            height: 200px;
+        }
+        .card-body {
+            text-align: center;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+        .card-text {
+            font-size: 1rem;
+        }
+
+
+       
+        .horarios-card {
+            background-color: #f8f9fa;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .horarios-card-header {
+            background-color: #000;
+            color: #fff;
+            border-radius: 8px 8px 0 0;
+            padding: 10px 15px;
+            font-size: 1.25rem;
+        }
+        .horarios-card-body {
+            padding: 15px;
+        }
+        .horarios-card-body p {
+            margin: 0;
+        }
+        .img-fluid {
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        
+        .map-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 10px;
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .contact-info {
+        margin-top: 12px;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+
+    }
+    
+    .contact-info h3 {
+        margin-bottom: 15px;
+        font-size: 1.6rem;
+        color: #333;
+    }
+    
+    .contact-info p {
+        font-size: 1rem;
+        color: #555;
+    }
+    
+    
+    .social-section {
+        margin-top: 20px;
+    }
+    
+    .social-section h4 {
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+        color: #333;
+        font-weight: bold;
+    }
+    
+    .social-links {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        font-size: 2rem;
+        color: #fff;
+        text-decoration: none;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .social-icon:hover {
+        transform: scale(1.1);
+    }
+    
+    .whatsapp {
+        background-color: #25D366;
+    }
+    
+    .whatsapp:hover {
+        background-color: #1DA851;
+    }
+    
+    .instagram {
+        background-color: #E4405F;
+    }
+    
+    .instagram:hover {
+        background-color: #C13584;
+    }
+    
+    .facebook {
+        background-color: #1877F2;
+    }
+    
+    .facebook:hover {
+        background-color: #145dbf;
+    }
+   
+     
+
+   
+ 
+        .derechos{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <img src="../img/fitness.png" height="250" alt="Logo EMDC FIT">
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <a href="#misionvision">Misión y Visión</a>
+                    <a href="#servicios">Servicios</a>
+                    <a href="#equipos">Equipos Disponibles</a>
+                    <a href="#horarios">Horarios</a>
+                    <a href="#ubicacion">Ubicación</a>
+                    <a href="../index.php" class="link">Iniciar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="misionvision" class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>Misión y Visión</h2>
+                    <p><strong>Misión:</strong> En EMDC FIT, nuestra misión es promover un estilo de vida saludable y activo a través de programas de fitness innovadores, un ambiente motivador y un equipo de profesionales dedicados. Nos esforzamos por proporcionar a nuestros miembros las herramientas y el apoyo necesarios para alcanzar sus metas de bienestar físico y mental.</p>
+                    <p><strong>Visión:</strong> Nuestra visión es ser el gimnasio líder en la comunidad, reconocido por nuestra excelencia en servicio y resultados. Aspiramos a crear una comunidad inclusiva y solidaria donde cada miembro se sienta valorado y empoderado para lograr su máximo potencial de salud y bienestar.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="../img/ejemplo1.jpg" class="img-fluid" alt="Misión y Visión">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="servicios" class="section">
+        <div class="container">
+            <h2>Servicios Ofrecidos</h2>
+            <div id="serviciosCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../img/s1.jpg" alt="Entrenamientos Personalizados">
+                        <p><strong>Entrenamientos Personalizados:</strong> Diseñados específicamente para usted por nuestros entrenadores certificados, estos programas se adaptan a sus metas personales, ya sea pérdida de peso, ganancia muscular, o mejora general de la condición física.</p>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../img/s2.jpg" alt="Clases Grupales">
+                        <p><strong>Clases Grupales:</strong> Ofrecemos una variedad de clases grupales dinámicas y divertidas, como yoga, pilates, spinning, HIIT, y más, todas impartidas por instructores expertos que aseguran una experiencia motivadora y segura.</p>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../img/s3.jpg" alt="Asesoramiento Nutricional">
+                        <p><strong>Asesoramiento Nutricional:</strong> Nuestros nutricionistas están aquí para ayudarle a desarrollar un plan de alimentación saludable y sostenible que complemente su régimen de ejercicio, optimizando sus resultados y mejorando su bienestar general.</p>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../img/s4.jpg" alt="Evaluaciones de Salud y Condición Física">
+                        <p><strong>Evaluaciones de Salud y Condición Física:</strong> Realizamos evaluaciones completas para establecer su estado físico inicial y monitorear su progreso a lo largo del tiempo, ajustando sus programas según sea necesario.</p>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../img/s1.jpg" alt="Entrenamiento Funcional">
+                        <p><strong>Entrenamiento Funcional:</strong> Mejore su fuerza, movilidad y rendimiento diario con sesiones de entrenamiento funcional que imitan movimientos de la vida real, ayudándole a prevenir lesiones y mejorar su calidad de vida.</p>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../img/s2.jpg" alt="Área de Spa y Recuperación">
+                        <p><strong>Área de Spa y Recuperación:</strong> Disfrute de nuestras instalaciones de spa, incluyendo masajes terapéuticos, sauna, y baños de vapor, para relajarse y recuperarse después de un entrenamiento intenso.</p>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../img/s3.jpg" alt="Programas de Bienestar Corporativo">
+                        <p><strong>Programas de Bienestar Corporativo:</strong> Diseñados para empresas que desean mejorar la salud y el bienestar de sus empleados, ofrecemos programas personalizados que pueden incluir clases de ejercicio, talleres de nutrición y sesiones de mindfulness.</p>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#serviciosCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#serviciosCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="equipos">
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Equipos Disponibles</h2>
+        <p class="text-center mb-5">Listado de los equipos y máquinas disponibles para entrenamiento. Incluye marcas y tipos específicos.</p>
+        <div class="row g-4">
+            <!-- Tarjeta 1 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="../img/Maquina de pesas.jpg" class="card-img-top" alt="Equipo 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Equipo 1</h5>
+                        <p class="card-text">Descripción del equipo 1. Marca: XYZ, Tipo: Máquina de pesas.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Tarjeta 2 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="../img/caminadora.jpg" class="card-img-top" alt="Equipo 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Equipo 2</h5>
+                        <p class="card-text">Descripción del equipo 2. Marca: ABC, Tipo: Cinta de correr.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Tarjeta 3 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="../img/bicicleta.jpg" class="card-img-top" alt="Equipo 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Equipo 3</h5>
+                        <p class="card-text">Descripción del equipo 3. Marca: DEF, Tipo: Bicicleta estática.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Tarjeta 4 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="../img/maquina de remo.jpg" class="card-img-top" alt="Equipo 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Equipo 4</h5>
+                        <p class="card-text">Descripción del equipo 4. Marca: GHI, Tipo: Máquina de remo.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Tarjeta 5 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="../img/banco de pesas.jpg" class="card-img-top" alt="Equipo 5">
+                    <div class="card-body">
+                        <h5 class="card-title">Equipo 5</h5>
+                        <p class="card-text">Descripción del equipo 5. Marca: JKL, Tipo: Banco de pesas.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Tarjeta 6 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="../img/estiramientos.jpg" class="card-img-top" alt="Equipo 6">
+                    <div class="card-body">
+                        <h5 class="card-title">Equipo 6</h5>
+                        <p class="card-text">Descripción del equipo 6. Marca: MNO, Tipo: Máquina de estiramiento.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div id="horarios" class="section">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-lg-9">
+                    <h2>Horarios</h2>
+                    <p>Horarios de apertura y cierre del gimnasio. Incluye también los horarios de clases y actividades específicas.</p>
+                </div>
+               
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card horarios-card">
+                        <div class="card-header horarios-card-header">
+                            <i class="bi bi-person-arms-up"></i> Lunes
+                        </div>
+                        <div class="card-body horarios-card-body">
+                            <p><strong>Apertura:</strong> 6:00 AM</p>
+                            <p><strong>Cierre:</strong> 10:00 PM</p>
+                            <p><strong>Clases:</strong> Yoga: 8:00 AM, HIIT: 6:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card horarios-card">
+                        <div class="card-header horarios-card-header">
+                            <i class="bi bi-bicycle"></i> Martes
+                        </div>
+                        <div class="card-body horarios-card-body">
+                            <p><strong>Apertura:</strong> 6:00 AM</p>
+                            <p><strong>Cierre:</strong> 10:00 PM</p>
+                            <p><strong>Clases:</strong> Pilates: 9:00 AM, Spinning: 7:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card horarios-card">
+                        <div class="card-header horarios-card-header">
+                            <i class="bi bi-person-arms-up"></i> Miércoles
+                        </div>
+                        <div class="card-body horarios-card-body">
+                            <p><strong>Apertura:</strong> 6:00 AM</p>
+                            <p><strong>Cierre:</strong> 10:00 PM</p>
+                            <p><strong>Clases:</strong> Yoga: 8:00 AM, HIIT: 6:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card horarios-card">
+                        <div class="card-header horarios-card-header">
+                            <i class="bi bi-bicycle"></i> Jueves
+                        </div>
+                        <div class="card-body horarios-card-body">
+                            <p><strong>Apertura:</strong> 6:00 AM</p>
+                            <p><strong>Cierre:</strong> 10:00 PM</p>
+                            <p><strong>Clases:</strong> Pilates: 9:00 AM, Spinning: 7:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card horarios-card">
+                        <div class="card-header horarios-card-header">
+                            <i class="bi bi-person-arms-up"></i> Viernes
+                        </div>
+                        <div class="card-body horarios-card-body">
+                            <p><strong>Apertura:</strong> 6:00 AM</p>
+                            <p><strong>Cierre:</strong> 10:00 PM</p>
+                            <p><strong>Clases:</strong> Yoga: 8:00 AM, HIIT: 6:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card horarios-card">
+                        <div class="card-header horarios-card-header">
+                            <i class="bi bi-cone-striped"></i> Sábado
+                        </div>
+                        <div class="card-body horarios-card-body">
+                            <p><strong>Apertura:</strong> 7:00 AM</p>
+                            <p><strong>Cierre:</strong> 8:00 PM</p>
+                            <p><strong>Clases:</strong> Crossfit: 10:00 AM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mx-auto">
+                    <div class="card horarios-card">
+                        <div class="card-header horarios-card-header">
+                            <i class="bi bi-person-x-fill"></i> Domingo
+                        </div>
+                        <div class="card-body horarios-card-body">
+                            <p><strong>Apertura:</strong> 8:00 AM</p>
+                            <p><strong>Cierre:</strong> 6:00 PM</p>
+                            <p><strong>Clases:</strong> Descanso</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ubicacion">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-lg-6">
+                    <h2>Ubicación</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.1486578684766!2d-122.08424908468199!3d37.42206577982668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb4f64324b2cf%3A0xf3ae2b8e28f8a1c3!2sGoogleplex!5e0!3m2!1ses!2sus!4v1646287954173!5m2!1ses!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-info">
+                        <h3>Datos de Contacto</h3>
+                        <p><i class="fa fa-map-marker-alt"></i> Dirección: 1600 Amphitheatre Parkway, Mountain View, CA 94043, EE. UU.</p>
+                        <p><i class="fa fa-phone"></i> Teléfono: +1 650-253-0000</p>
+                        <p><i class="fa fa-envelope"></i> Email: info@gimnasio.com</p>
+                        <div class="social-section">
+                            <h4>Síguenos en nuestras redes sociales</h4>
+                            <div class="social-links">
+                                <a href="https://wa.me/6502530000" target="_blank" class="social-icon whatsapp">
+                                    <i class="bi bi-whatsapp"></i>
+                                </a>
+                                <a href="https://www.instagram.com/" target="_blank" class="social-icon instagram">
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+                                <a href="https://www.facebook.com/" target="_blank" class="social-icon facebook">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+<div class="derechos">
+    <p>&copy; 2024 EMDC FIT - Todos los derechos reservados</p>
+
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

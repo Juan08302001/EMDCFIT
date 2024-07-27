@@ -1,0 +1,121 @@
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    correo VARCHAR(255) NOT NULL UNIQUE,
+    clave VARCHAR(255) NOT NULL,
+    rol ENUM('admin', 'cliente') NOT NULL DEFAULT 'cliente'
+);
+
+CREATE TABLE IF NOT EXISTS clientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT,
+    nombre VARCHAR(255) NOT NULL,
+    direccion VARCHAR(255),
+    telefono VARCHAR(20),
+    correo_electronico VARCHAR(255) UNIQUE,
+    fecha_nacimiento DATE,
+    genero ENUM('Masculino', 'Femenino', 'Otro'),
+    nombre_usuario VARCHAR(255) NOT NULL,
+    clave VARCHAR(255) NOT NULL,
+    foto VARCHAR(255),
+    rol ENUM('admin', 'cliente') NOT NULL DEFAULT 'cliente');
+
+CREATE TABLE IF NOT EXISTS pagos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    tipo_pago ENUM('mes', 'semana', 'visita') NOT NULL,
+    fecha_pago DATE NOT NULL,
+    monto DECIMAL(10,2) NOT NULL,FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+
+CREATE TABLE IF NOT EXISTS productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    cantidad INT NOT NULL,
+    cantidad_minima INT NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    marca VARCHAR(255) NOT NULL,
+    categoria VARCHAR(255) NOT NULL
+);
+
+ALTER TABLE pagos
+ADD COLUMN fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+CREATE TABLE Notificaciones (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Producto INT,
+    TipoNotificacion VARCHAR(50),
+    FechaHora DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Estado ENUM('Cantidad minima es necesario comprar mas', 'Leída') DEFAULT 'Cantidad minima es necesario comprar mas',
+    FOREIGN KEY (ID_Producto) REFERENCES Productos(ID)
+);
+
+
+
+DELIMITER //
+
+CREATE TRIGGER trg_InsertarExistenciaMinima AFTER INSERT ON Productos
+FOR EACH ROW
+BEGIN
+    IF NEW.Cantidad <= NEW.Cantidad_minima THEN
+        INSERT INTO Notificaciones (ID_Producto, TipoNotificacion)
+        VALUES (NEW.ID, 'agotamiento');
+    END IF;
+END //
+
+DELIMITER ;
+
+
+
+DELIMITER //
+
+CREATE TRIGGER trg_AgotamientoExistencias AFTER UPDATE ON Productos
+FOR EACH ROW
+BEGIN
+    DECLARE numNotificaciones INT;
+
+    -- Contar el número de notificaciones existentes para el producto actual
+    SELECT COUNT(*) INTO numNotificaciones
+    FROM Notificaciones
+    WHERE ID_Producto = NEW.ID AND TipoNotificacion = 'agotamiento';
+
+    IF NEW.Cantidad <= NEW.Cantidad_minima THEN
+        -- Si no hay notificación existente, insertar una nueva
+        IF numNotificaciones = 0 THEN
+            INSERT INTO Notificaciones (ID_Producto, TipoNotificacion)
+            VALUES (NEW.ID, 'agotamiento');
+        END IF;
+    ELSE
+        -- Eliminar la notificación si la existencia es mayor que la existencia mínima
+        DELETE FROM Notificaciones
+        WHERE ID_Producto = NEW.ID AND TipoNotificacion = 'agotamiento';
+    END IF;
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE TRIGGER trg_EliminarNotificaciones AFTER DELETE ON Productos
+FOR EACH ROW
+BEGIN
+    DELETE FROM Notificaciones
+    WHERE ID_Producto = OLD.ID;
+END //
+
+DELIMITER ;
+
+
+SELECT CONSTRAINT_NAME
+FROM information_schema.KEY_COLUMN_USAGE
+WHERE TABLE_NAME = 'Notificaciones' AND CONSTRAINT_SCHEMA = 'EMDCFIT';
+
+ALTER TABLE Notificaciones
+DROP FOREIGN KEY <nombre_de_la_restricción>;
+
+
+ALTER TABLE Notificaciones
+ADD CONSTRAINT notificaciones_ibfk_1
+FOREIGN KEY (ID_Producto) REFERENCES productos(id)
+ON DELETE CASCADE;
